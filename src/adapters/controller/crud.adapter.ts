@@ -1,29 +1,41 @@
 import { Injectable } from '@nestjs/common';
-import { FilterQuery } from 'mongoose';
-import { ICrudService } from 'src/common/interfaces/crud-service.interface';
-import { CrudProvider } from 'src/providers/controller/crud.provider';
+
+import {
+  ICrudService,
+  IParamCrudServiceCreateOne,
+  IParamCrudServiceDeleteOne,
+  IParamCrudServiceFindOne,
+  IParamCrudServiceFindOneById,
+  IParamCrudServiceUpdateOne,
+} from '../../common/interfaces';
+
+import { CrudProvider } from '../../providers/controller';
 
 @Injectable()
 export class CrudAdapter implements ICrudService {
   constructor(private readonly crudProvider: CrudProvider) {}
 
-  async createOne<T>(createDto): Promise<T> {
-    return await this.crudProvider.createOne<T>(createDto);
+  async createOne<T>(params: IParamCrudServiceCreateOne): Promise<T> {
+    return await this.crudProvider.createOne<T>(params);
   }
 
   async findAll<T>(): Promise<T> {
     return await this.crudProvider.findAll<T>();
   }
 
-  async findOne<T>(filter: FilterQuery<T>): Promise<T> {
-    return await this.crudProvider.findOne<T>(filter);
+  async findOneById<T>(params: IParamCrudServiceFindOneById): Promise<T> {
+    return await this.crudProvider.findOneById<T>(params);
   }
 
-  async updateOne<T>(id: string, updateDto: any): Promise<T> {
-    return await this.crudProvider.updateOne<T>(id, updateDto);
+  async findOne<T>(params: IParamCrudServiceFindOne): Promise<T> {
+    return await this.crudProvider.findOne<T>(params);
   }
 
-  async deleteOne<T>(id: string): Promise<T> {
-    return await this.crudProvider.deleteOne<T>(id);
+  async updateOne<T>(params: IParamCrudServiceUpdateOne): Promise<T> {
+    return await this.crudProvider.updateOne<T>(params);
+  }
+
+  async deleteOne<T>(params: IParamCrudServiceDeleteOne): Promise<T> {
+    return await this.crudProvider.deleteOne<T>(params);
   }
 }

@@ -1,9 +1,28 @@
 import { Module } from '@nestjs/common';
-import { CrudProvider } from 'src/providers/controller/crud.provider';
-import { CrudAdapter } from './controller/crud.adapter';
+
+import {
+  CrudProvider,
+  AuthProvider,
+  ChildCrudProvider,
+} from '../providers/controller/';
+import { CrudAdapter, AuthAdapter, ChildCrudAdapter } from './controller';
 
 @Module({
-  providers: [CrudAdapter, CrudProvider],
-  exports: [CrudAdapter, CrudProvider],
+  providers: [
+    AuthAdapter,
+    AuthProvider,
+    CrudAdapter,
+    CrudProvider,
+    ChildCrudAdapter,
+    ChildCrudProvider,
+  ],
+  exports: [
+    AuthAdapter,
+    AuthProvider,
+    CrudAdapter,
+    CrudProvider,
+    ChildCrudAdapter,
+    ChildCrudProvider,
+  ],
 })
 export class AdaptersModule {}

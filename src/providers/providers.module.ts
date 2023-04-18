@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { CrudProvider } from './controller/crud.provider';
+
+import { CrudProvider, AuthProvider, ChildCrudProvider } from './controller';
 
 @Module({
-  providers: [CrudProvider],
-  exports: [CrudProvider],
+  providers: [AuthProvider, CrudProvider, ChildCrudProvider],
+  exports: [AuthProvider, CrudProvider, ChildCrudProvider],
 })
 export class ProvidersModule {}
